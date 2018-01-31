@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#161616</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="text_light">@android:color/white</color>
+    <color name="text_dark">#616161</color>
+    <color name="light_grey">#E0E0E0</color>
+
+    <color name="loginButtonColor">#2aabd2</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="circle_color">#3982c1</color>
+
+
+</resources>

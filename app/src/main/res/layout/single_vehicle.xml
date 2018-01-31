@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/blue_circle_back"
+            android:src="@drawable/car_icon"
+            android:id="@+id/vehicle_image"
+            android:padding="13dp"/>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/vehicle_image"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/model"
+                android:text="Toyota Corola-X"
+                style="@style/VehicleDescName" />
+            <TextView
+                android:id="@+id/number"
+                android:text="Dhaka Metro Ga 3235"
+                style="@style/VehicleDescNumber"/>
+
+            <TextView
+                android:id="@+id/location"
+                android:text="Dhanmondi,Dhaka"
+                style="@style/VehicleDescNumber"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
