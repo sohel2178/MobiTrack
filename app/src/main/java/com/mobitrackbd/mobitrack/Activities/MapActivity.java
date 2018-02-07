@@ -60,7 +60,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        vehicle = new Vehicle(1,23.746466,90.376015);
+       // vehicle = new Vehicle(1,23.746466,90.376015);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -84,7 +84,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void gotoVehicleLocation(Vehicle vehicle) {
-        LatLng latLng = new LatLng(vehicle.getLat(),vehicle.getLng());
+        LatLng latLng = new LatLng(23.746466,90.376015);
 
         MarkerOptions option = new MarkerOptions().position(latLng).title("Vehicle Location");
         CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(12).tilt(30).build();
