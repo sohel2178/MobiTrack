@@ -2,6 +2,13 @@
     <string name="app_name">MobiTrack</string>
     <string name="google_map_key">AIzaSyDpIfAvz9xaXCiBueo3SNYOj6rgqvRJxFk</string>
 
+    <string name="login_show_text">Login to your Account</string>
+    <string name="login_email_text">Login Email</string>
+    <string name="login_password_text"><font size="15">Password</font></string>
+
+    <string name="loading">Loading...\nPlease Wait</string>
+
+
     <!--Navigation Drawer Constant-->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>

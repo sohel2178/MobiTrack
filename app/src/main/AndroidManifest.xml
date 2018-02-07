@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <permission
         android:name="com.mobitrackbd.mobitrack.permission.MAP_RECEIVE"
@@ -42,7 +44,13 @@
             android:value="@string/google_map_key" />
 
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Activities.MapActivity"></activity>
+        <activity android:name=".Activities.MapActivity" />
+
+        <service
+            android:name=".Services.LocationService"
+            android:enabled="true"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
