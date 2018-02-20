@@ -159,7 +159,7 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
             if(startSpan.getSpanNo()==endSpan.getSpanNo()){
                 spanList.get(startSpan.getSpanNo()).addDistance(x.getDistance());
 
-                Log.d("HHHHHHHHHH","Avg Speed "+x.getAverageSpeed());
+                Log.d("gggg","Avg Speed "+x.getAverageSpeed());
 
             }else{
                // Todo Do in Next
