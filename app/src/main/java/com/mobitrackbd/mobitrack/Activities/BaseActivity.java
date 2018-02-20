@@ -1,5 +1,8 @@
 package com.mobitrackbd.mobitrack.Activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +45,14 @@ public class BaseActivity extends AppCompatActivity {
         //getSupportActionBar().setTitle(Constant.HOME);
         mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
+
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
 
 
 

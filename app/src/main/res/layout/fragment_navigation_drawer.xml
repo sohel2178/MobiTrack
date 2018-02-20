@@ -3,8 +3,185 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     tools:context="com.mobitrackbd.mobitrack.NavigationDrawer">
 
+    <RelativeLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/user"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_image"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true">
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/VehicleDescName"
+                android:text="Md. Raisul Islam"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/user_mail"
+                android:layout_below="@+id/user_name"
+                style="@style/VehicleDescNumber"
+                android:text="RaisulIslam@mail.com"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_container"
+        android:layout_below="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/large_padding">
+
+        <RelativeLayout
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+
+            <ImageView
+                android:id="@+id/home_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/home"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/home_text"
+                android:layout_toEndOf="@+id/home_icon"
+                style="@style/NavTextStyle"
+                android:text="Home" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
+
+        <RelativeLayout
+            android:id="@+id/about"
+            android:layout_below="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/aboutus"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/about_text"
+                android:layout_toRightOf="@+id/about_icon"
+                style="@style/NavTextStyle"
+                android:text="About Us" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/border_height"
+            android:id="@+id/contact"
+            android:layout_below="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/contact_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/contactus"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_toRightOf="@+id/contact_icon"
+                style="@style/NavTextStyle"
+                android:text="Contact Us" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
+
+        <RelativeLayout
+            android:id="@+id/account"
+            android:layout_below="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/acc_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/account"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/acc_text"
+                android:layout_toRightOf="@+id/acc_icon"
+                style="@style/NavTextStyle"
+                android:text="Account Info" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
+
+
+        <RelativeLayout
+            android:id="@+id/setting"
+            android:layout_below="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/setting_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/setting"
+                android:padding="@dimen/very_small_padding"/>
+
+            <TextView
+                android:id="@+id/setting_text"
+                android:layout_toRightOf="@+id/setting_icon"
+                style="@style/NavTextStyle"
+                android:text="Setting" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/setting"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider"/>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

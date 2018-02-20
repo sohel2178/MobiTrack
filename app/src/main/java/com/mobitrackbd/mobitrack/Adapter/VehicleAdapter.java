@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mobitrackbd.mobitrack.Listener.VehicleClickListener;
 import com.mobitrackbd.mobitrack.Model.Vehicle;
 import com.mobitrackbd.mobitrack.R;
 
@@ -22,10 +23,12 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleH
     private Context context;
     private List<Vehicle> vehicleList;
     private LayoutInflater inflater;
+    private VehicleClickListener clickListener;
 
 
-    public VehicleAdapter(Context context) {
+    public VehicleAdapter(Context context, VehicleClickListener clickListener) {
         this.context = context;
+        this.clickListener = clickListener;
         this.vehicleList = new ArrayList<>();
         this.inflater = LayoutInflater.from(context);
     }
@@ -38,10 +41,22 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleH
        return holder;
     }
 
+    public void addVehicle(Vehicle vehicle){
+        vehicleList.add(vehicle);
+        int position = vehicleList.indexOf(vehicle);
+        notifyItemInserted(position);
+    }
+
     @Override
     public void onBindViewHolder(VehicleHolder holder, int position) {
 
         Vehicle vehicle = vehicleList.get(position);
+
+        holder.tvModel.setText(vehicle.getVehicle_number());
+        holder.tvNumber.setText(vehicle.getVehicle_number());
+        holder.tvLocation.setText(vehicle.getVehicle_address());
+
+
 
         //holder.tvModel.setText();
 
@@ -68,6 +83,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleH
 
         @Override
         public void onClick(View v) {
+            clickListener.onClick(vehicleList.get(getAdapterPosition()));
 
         }
     }
