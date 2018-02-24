@@ -16,6 +16,7 @@
 
     <RelativeLayout
         android:layout_below="@+id/toolbar"
+        android:id="@+id/top_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/default_padding">
@@ -25,11 +26,13 @@
             android:layout_height="wrap_content"
             app:cardElevation="6dp"
             app:cardCornerRadius="6dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/default_padding">
+
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -73,51 +76,156 @@
                     android:layout_height="1dp"
                     android:background="@android:color/black"/>
 
-                <TableRow
-                    android:layout_marginTop="@dimen/medium_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/tomato_color">
-
-                    <TextView
-                        android:padding="@dimen/small_padding"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Hours"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_weight="1"/>
-
-                    <TextView
-                        android:padding="@dimen/small_padding"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Travel Distance"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_weight="1"/>
-
-                </TableRow>
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rv_travel_distance"/>
-
-
-                <TextView
-                    android:id="@+id/test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="18sp"/>
-
 
             </LinearLayout>
+
+
         </android.support.v7.widget.CardView>
 
-
     </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_container"
+        android:id="@+id/content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_padding">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="6dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/default_padding">
+
+
+                        <TextView
+                            android:id="@+id/test"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/small_padding"
+                            android:textSize="14sp"/>
+
+                        <TableRow
+                            android:layout_marginTop="@dimen/medium_padding"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/tomato_color">
+
+                            <TextView
+                                android:padding="@dimen/medium_padding"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Hours"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                android:padding="@dimen/medium_padding"
+                                android:layout_width="0dp"
+                                android:gravity="center"
+                                android:layout_height="wrap_content"
+                                android:text="Travel Distance"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:layout_weight="1"/>
+
+                        </TableRow>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rv_travel_distance"/>
+
+
+
+
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_padding">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Travel Distance Vs Time"
+                            android:padding="@dimen/medium_padding"
+                            android:gravity="center_horizontal"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/small_padding"
+                            android:background="@color/black"
+                            android:layout_marginStart="@dimen/medium_padding"
+                            android:layout_marginEnd="@dimen/medium_padding"/>
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:id="@+id/bar_chart">
+
+                        </com.github.mikephil.charting.charts.BarChart>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                </android.support.v7.widget.CardView>
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
+
+
 
 
 

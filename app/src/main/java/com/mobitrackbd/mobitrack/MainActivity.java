@@ -2,7 +2,6 @@ package com.mobitrackbd.mobitrack;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.mobitrackbd.mobitrack.Activities.BaseActivity;
 import com.mobitrackbd.mobitrack.Fragments.HomeFragment;
@@ -18,14 +17,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Log.d("RRRRR",MyUtil.getBeginingTime(new Date())+"");
-
-        for (Span x: MyUtil.getSpanList(new Date())){
-            Log.d("SOHEL","Start Time: "+x.getStartTime());
-            //Log.d("SOHEL","End Time: "+x.getEndTime());
-        }
-
 
         LocalData localData = new LocalData(getApplicationContext());
         if(!localData.isLogin()){

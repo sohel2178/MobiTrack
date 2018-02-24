@@ -13,11 +13,19 @@
         android:background="@color/colorPrimaryDark"
         android:padding="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <!--<de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/user"/>
+            android:src="@drawable/user"/>-->
+        <TextView
+            android:id="@+id/user_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/user_image_back"
+            android:gravity="center"
+            android:textSize="30sp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -154,28 +162,28 @@
 
 
         <RelativeLayout
-            android:id="@+id/setting"
+            android:id="@+id/signout"
             android:layout_below="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding">
             <ImageView
-                android:id="@+id/setting_icon"
+                android:id="@+id/signout_icon"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:src="@drawable/setting"
+                android:src="@drawable/signout"
                 android:padding="@dimen/very_small_padding"/>
 
             <TextView
                 android:id="@+id/setting_text"
-                android:layout_toRightOf="@+id/setting_icon"
+                android:layout_toRightOf="@+id/signout_icon"
                 style="@style/NavTextStyle"
-                android:text="Setting" />
+                android:text="Signout" />
         </RelativeLayout>
 
         <View
             android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/setting"
+            android:layout_below="@+id/signout"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/divider"/>

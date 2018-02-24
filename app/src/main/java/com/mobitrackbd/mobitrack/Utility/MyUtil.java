@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class MyUtil {
     private static final String DATE_FORMAT="dd-MMM-yyyy";
     private static final String DATE_FORMAT_TWO="dd-MMM-yyyy";
-    private static final String TIME_FORMAT="yyyy-MM-dd hh:mm:ss";
+    private static final String TIME_FORMAT="yyyy-MM-dd HH:mm:ss";
 
 
     public static String getStringDate(Date date){
@@ -42,6 +42,13 @@ public class MyUtil {
             e.printStackTrace();
         }
         return date.getTime();
+    }
+
+    public static String getStringDate2(String time){
+
+        DateFormat df = new SimpleDateFormat(TIME_FORMAT);
+        Date date = new Date(Long.parseLong(time));
+        return df.format(date);
     }
 
     public static int getDuration(long fDate,long sDate){
@@ -117,6 +124,12 @@ public class MyUtil {
 
 
         return time+(60*60)*1000;
+
+    }
+
+    public static String getTwoDecimalFormat(double value){
+
+        return String.format("%.2f", value);
 
     }
 

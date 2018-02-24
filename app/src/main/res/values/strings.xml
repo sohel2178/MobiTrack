@@ -42,5 +42,33 @@
         <item>Distance Report For Your Vehicle</item>
         <item>Fuel Consumption Report For Your Vehicle</item>
     </string-array>
+
+    <string-array name="hour_array">
+        <item>12:01 AM to 01:00 AM</item>
+        <item>01:01 AM to 02:00 AM</item>
+        <item>02:01 AM to 03:00 AM</item>
+        <item>03:01 AM to 04:00 AM</item>
+        <item>04:01 AM to 05:00 AM</item>
+        <item>05:01 AM to 06:00 AM</item>
+        <item>06:01 AM to 07:00 AM</item>
+        <item>07:01 AM to 08:00 AM</item>
+        <item>08:01 AM to 09:00 AM</item>
+        <item>09:01 AM to 10:00 AM</item>
+        <item>10:01 AM to 11:00 AM</item>
+        <item>11:01 AM to 12:00 PM</item>
+
+        <item>12:01 PM to 01:00 PM</item>
+        <item>01:01 PM to 02:00 PM</item>
+        <item>02:01 PM to 03:00 PM</item>
+        <item>03:01 PM to 04:00 PM</item>
+        <item>04:01 PM to 05:00 PM</item>
+        <item>05:01 PM to 06:00 PM</item>
+        <item>06:01 PM to 07:00 PM</item>
+        <item>07:01 PM to 08:00 PM</item>
+        <item>08:01 PM to 09:00 PM</item>
+        <item>09:01 PM to 10:00 PM</item>
+        <item>10:01 PM to 11:00 PM</item>
+        <item>11:01 PM to 12:00 AM</item>
+    </string-array>
 </resources>
 

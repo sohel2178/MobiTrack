@@ -35,7 +35,8 @@ import java.util.Map;
  */
 
 public class DistanceRequest {
-    private static final String WEB_API_KEY="AIzaSyA-bYTLzcDgXrH3a2-fPHppu9vsNkZCGDk";
+    private static final String WEB_API_KEY="AIzaSyAbXl5sEkZxVmiLBrvSgHkhwkuZJV1Wn0k";
+    //private static final String WEB_API_KEY="AIzaSyA-bYTLzcDgXrH3a2-fPHppu9vsNkZCGDk";
 
     private Activity activity;
     private Map<String,String> params;
@@ -84,39 +85,22 @@ public class DistanceRequest {
                     @Override
                     public void onResponse(String response) {
 
+                        Log.d("MYDDD",response);
+
                                                 //hideProgressDialog();
 
                         SummaryReportResponse summaryReportResponse = gson.fromJson(response,SummaryReportResponse.class);
-                        Log.d("sssss",summaryReportResponse.getLatlongs().size()+"");
-                        Log.d("sssss",summaryReportResponse.getLatlongs().get(0).getServertime());
 
                         if(summaryReportResponse.getLatlongs() != null && summaryReportResponse.getLatlongs().size() > 0){
                             List<DeviceLatLong> processList = getProcessList(summaryReportResponse.getLatlongs());
                             size = processList.size()-1;
 
-                            MyThread myThread = new MyThread(processList);
+                            if(size>0){
+                                MyThread myThread = new MyThread(processList);
+                            }else{
+                                hideProgressDialog();
+                            }
 
-                            /*DeviceLatLong start = null;
-                            DeviceLatLong next = null;
-
-                            size = processList.size()-1;
-
-                            for(int i = 0; i<processList.size(); i++){
-                                if(i == 0){
-                                    start = processList.get(i);
-                                }else{
-                                    next = processList.get(i);
-
-                                    Data travelDistance = new Data();
-                                    travelDistance.setStartTime(MyUtil.getTimeInMilis(start.getServertime()));
-                                    travelDistance.setEndTime(MyUtil.getTimeInMilis(next.getServertime()));
-
-                                    travelDistanceList.add(travelDistance);
-                                    requsetForDirection(start, next, i-1);
-                                    start = next;
-                                }
-
-                            }*/
                         }
 
 
@@ -127,8 +111,6 @@ public class DistanceRequest {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                         hideProgressDialog();
-
-                        Log.d("EEEE",error.getMessage());
 
                         Toast.makeText(activity, "Problem in Fetching Data", Toast.LENGTH_SHORT).show();
                     }
@@ -146,8 +128,6 @@ public class DistanceRequest {
 
         counter++;
 
-        Log.d("UUU",counter+"");
-        Log.d("UUU",size+"");
 
         this.url = buildRequestUrl(origin,destination);
 
@@ -158,7 +138,6 @@ public class DistanceRequest {
 
                 try {
                     String status = response.getString("status");
-                    Log.d("HHH",status);
 
                     if(status.equals("OK")){
                         processResponse(response,index);
@@ -205,9 +184,6 @@ public class DistanceRequest {
 
                 travelDistanceList.get(index).setDistance(leg.getJSONObject("distance").getDouble("value"));
 
-                Log.d("YYYYYYYYYYY","Start Time: "+travelDistanceList.get(index).getStartTime());
-                Log.d("YYYYYYYYYYY","End Time: "+travelDistanceList.get(index).getEndTime());
-                Log.d("YYYYYYYYYYY","Travel Distance: "+travelDistanceList.get(index).getDistance());
 
                 String polyline = poly.getString("points");
 
@@ -215,7 +191,6 @@ public class DistanceRequest {
 
 
             }
-            Log.d("IIIII",processCounter+"");
             if(processCounter == size){
 
                 if(travelDistanceListener != null){
@@ -292,8 +267,6 @@ public class DistanceRequest {
                 }
             }
 
-            Log.d("JJJJJJJJ",distance+"");
-
 
 
         }
@@ -341,7 +314,6 @@ public class DistanceRequest {
 
         private MyThread(List<DeviceLatLong> processList){
             this.processList = processList;
-            Log.d("JJJ","Constructor Called");
             this.start();
 
         }
@@ -350,8 +322,6 @@ public class DistanceRequest {
         @Override
         public void run() {
             super.run();
-
-            Log.d("JJJ","run Called");
 
             DeviceLatLong start = null;
             DeviceLatLong next = null;
@@ -366,15 +336,10 @@ public class DistanceRequest {
                     travelDistance.setStartTime(MyUtil.getTimeInMilis(start.getServertime()));
                     travelDistance.setEndTime(MyUtil.getTimeInMilis(next.getServertime()));
 
-                    Log.d("GGGGGGGG","Start Time: "+start.getServertime());
-                    Log.d("GGGGGGGG","End Time: "+next.getServertime());
-
                     travelDistanceList.add(travelDistance);
                     requsetForDirection(start, next, i-1);
                     start = next;
                 }
-
-                Log.d("JJJ","Inside For Called");
 
                 try {
                     Thread.sleep(10);

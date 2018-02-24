@@ -12,7 +12,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -84,9 +83,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 currentLocation = latLng;
             }
 
-            Log.d("JJJJ",myLocation.getLatitude());
-            Log.d("JJJJ",myLocation.getLongitude());
-            //Log.d("JJJJ",myLocation.getAddress());
+
         }
 
 
@@ -268,14 +265,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void getRespose(String response) {
-        Log.d("ZZZZ",response);
         LastLocationResponse lastLocationResponse = gson.fromJson(response,LastLocationResponse.class);
         if(lastLocationResponse.getSuccess()==1){
             MyLocation myLocation = lastLocationResponse.getLocation();
-            Log.d("RRRR",myLocation.getLatitude());
-            Log.d("RRRR",myLocation.getLongitude());
-            //Log.d("RRRR",myLocation.getAddress());
-
 
             currentLocation = new LatLng(Double.parseDouble(myLocation.getLatitude()),Double.parseDouble(myLocation.getLongitude()));
 

@@ -37,8 +37,8 @@ public class NavigationDrawer extends Fragment implements View.OnClickListener {
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
 
-    private RelativeLayout rlaboutus,rlHome,rlContact;
-    private TextView tvName, tvEmail;
+    private RelativeLayout rlaboutus,rlHome,rlContact,rlsignout;
+    private TextView tvName, tvEmail, tvUserImage;
 
     private LocalData localData;
 
@@ -85,14 +85,18 @@ public class NavigationDrawer extends Fragment implements View.OnClickListener {
         rlaboutus=view.findViewById(R.id.about);
         rlHome=view.findViewById(R.id.home);
         rlContact=view.findViewById(R.id.contact);
+        rlsignout = view.findViewById(R.id.signout);
         rlaboutus.setOnClickListener(this);
         rlHome.setOnClickListener(this);
         rlContact.setOnClickListener(this);
+        rlsignout.setOnClickListener(this);
 
         tvName = view.findViewById(R.id.user_name);
         tvEmail = view.findViewById(R.id.user_mail);
+        tvUserImage = view.findViewById(R.id.user_image);
         tvName.setText(localData.getCustomerName());
         tvEmail.setText(localData.getCustomerEmail());
+        tvUserImage.setText(String.valueOf(localData.getCustomerName().toUpperCase().charAt(0)));
     }
 
     @Override
@@ -185,6 +189,14 @@ public class NavigationDrawer extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", getString(R.string.mobi_phone), null));
                 startActivity(intent);
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+            case R.id.signout:
+
+                localData.setLogin(false);
+
+                getActivity().finish();
+                Intent intent1 = new Intent(getContext(),LoginActivity.class);
+                startActivity(intent1);
                 break;
             default:
         }

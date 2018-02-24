@@ -1,24 +1,42 @@
 package com.mobitrackbd.mobitrack.Activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.maps.model.LatLng;
+import com.mobitrackbd.mobitrack.Adapter.DistanceAdapter;
+import com.mobitrackbd.mobitrack.Chart.MyValueFormatter;
 import com.mobitrackbd.mobitrack.Listener.TravelDistanceListener;
 import com.mobitrackbd.mobitrack.Model.Data;
 import com.mobitrackbd.mobitrack.Model.DeviceLatLong;
 import com.mobitrackbd.mobitrack.Model.Span;
 import com.mobitrackbd.mobitrack.R;
+import com.mobitrackbd.mobitrack.Utility.DividerItemDecoration;
 import com.mobitrackbd.mobitrack.Utility.MyUtil;
 import com.mobitrackbd.mobitrack.Volley.DistanceRequest;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,27 +47,63 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
     private TextView tvDate;
     private ImageView ivCalender;
+    private RecyclerView rvDistance;
     private String deviceId;
     private double total;
 
-    private TextView tvTest;
+    private TextView tvTotalDistance;
 
     private Date selectedDate;
+
+    private DistanceAdapter adapter;
+
+    private ScrollView svContent;
+
+    private BarChart barChart;
+
+    private String[] hourArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sum_report);
-        tvTest = findViewById(R.id.test);
+
+        hourArr = getResources().getStringArray(R.array.hour_array);
+
+        tvTotalDistance = findViewById(R.id.test);
         deviceId = getIntent().getStringExtra("deviceid");
         total = 0;
         setupToolbar();
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         setTitle("24Hrs Summary Report");
 
-        initView();
+        adapter = new DistanceAdapter(getApplicationContext());
 
         selectedDate = new Date();
+
+        initView();
+
+        getDataFromOnline();
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if(id==android.R.id.home){
+            onBackPressed();
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    private void getDataFromOnline(){
+        // Invisible Content before Fetching Data
+        svContent.setVisibility(View.INVISIBLE);
 
         Map<String, String> param = new HashMap<>();
         param.put("deviceid",deviceId);
@@ -59,11 +113,25 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initView() {
+        svContent = findViewById(R.id.content);
+
+        barChart = findViewById(R.id.bar_chart);
+
         tvDate = findViewById(R.id.tv_date);
         ivCalender = findViewById(R.id.iv_calender);
         ivCalender.setOnClickListener(this);
 
-        tvDate.setText("24 Hours Report on "+MyUtil.getStringDate(new Date()));
+        tvDate.setText("24 Hours Report on "+MyUtil.getStringDate(selectedDate));
+
+        rvDistance = findViewById(R.id.rv_travel_distance);
+        rvDistance.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        rvDistance.setNestedScrollingEnabled(false);
+
+        //Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.divider_black);
+        //rvDistance.addItemDecoration(new android.support.v7.widget.DividerItemDecoration(getApplicationContext(), android.support.v7.widget.DividerItemDecoration.VERTICAL));
+        //rvDistance.addItemDecoration(new DividerItemDecoration(drawable));
+        rvDistance.setAdapter(adapter);
     }
 
     @Override
@@ -80,6 +148,9 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onSelect(List<Calendar> calendar) {
                 tvDate.setText("24 Hours Report on "+MyUtil.getStringDate(calendar.get(0).getTime()));
+
+                selectedDate = calendar.get(0).getTime();
+                getDataFromOnline();
             }
         }).pickerType(CalendarView.ONE_DAY_PICKER).date(Calendar.getInstance());
 
@@ -136,6 +207,8 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void processDataList(List<Data> dataList) {
+        // VIsibl Content after Fetching Data
+        svContent.setVisibility(View.VISIBLE);
 
         List<Span> spanList = MyUtil.getSpanList(selectedDate);
 
@@ -145,12 +218,6 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
         for (Data x: dataList){
 
-            if(dataList.indexOf(x)==0){
-                Log.d("JJJJJJJJJJJ",x.getStartTime()+"");
-                Log.d("JJJJJJJJJJJ",x.getEndTime()+"");
-                Log.d("JJJJJJJJJJJ",x.getDistance()+"");
-            }
-
             Map<String,Span> spanMap = getFirstAndLastSpan(spanList,x);
 
             Span startSpan = spanMap.get("start");
@@ -159,38 +226,120 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
             if(startSpan.getSpanNo()==endSpan.getSpanNo()){
                 spanList.get(startSpan.getSpanNo()).addDistance(x.getDistance());
 
-                Log.d("gggg","Avg Speed "+x.getAverageSpeed());
-
             }else{
-               // Todo Do in Next
-
-                int numberOfSpan = endSpan.getSpanNo()-startSpan.getSpanNo()+1;
 
                 double avgSpeed= x.getAverageSpeed();
 
-                Log.d("TTTTTTTTT","Avg Speed: "+avgSpeed);
-                Log.d("TTTTTTTTT","Pan Length: "+numberOfSpan);
+                if(avgSpeed<=2){
+                    spanList.get(endSpan.getSpanNo()).addDistance(x.getDistance());
+                }else{
+
+                    double totalFactor = (x.getEndTime()-x.getStartTime())/3600000.0;
+
+
+
+                    for(int i = startSpan.getSpanNo();i<=endSpan.getSpanNo();i++){
+                        double factor=0;
+                        if(i==startSpan.getSpanNo()){
+                             factor = (startSpan.getEndTime()-x.getStartTime())/3600000.0;
+                        }else if(i==endSpan.getSpanNo()){
+                             factor = (x.getEndTime()-endSpan.getStartTime())/3600000.0;
+                        }else{
+                            factor = 1;
+                        }
+
+                        spanList.get(i).addDistance(x.getDistance()*factor);
+
+
+                    }
+
+                }
+
 
 
             }
 
-            Log.d("JJJ",spanMap.get("start").getSpanNo()+"");
-            Log.d("JJJ",spanMap.get("end").getSpanNo()+"");
         }
 
 
-        for (Span ww: spanList){
-            //Log.d("HHHHHHHHHH","Span No = "+ww.getSpanNo()+" Travel Distance = "+ww.getDistance()+"");
-            Log.d("QQQQQQQ",ww.getStartTime()+"");
+        adapter.clear();
+
+        double distance =0;
+        for(Span x: spanList){
+            //Log.d("ATIKKKKK","Travel Distance On Hour "+(x.getSpanNo()+1) +" is "+x.getDistance());
+            adapter.addSpan(x);
+            distance = distance+x.getDistance();
         }
 
-        for (Span ww: spanList){
-            //Log.d("HHHHHHHHHH","Span No = "+ww.getSpanNo()+" Travel Distance = "+ww.getDistance()+"");
-            Log.d("RRRRRRRRRRRRRRR",ww.getEndTime()+"");
+        tvTotalDistance.setText("Total Distance Travel "+MyUtil.getTwoDecimalFormat(distance/1000)+" KM");
+
+
+        processForChart(spanList);
+
+
+
+
+    }
+
+    private void processForChart(List<Span> spanList) {
+
+        BarDataSet set = getBarDataSet(spanList);
+        List<String> labels = getLabels(spanList);
+        set.setColors(ColorTemplate.JOYFUL_COLORS);
+        set.setValueTextSize(10);
+
+        BarData data = new BarData(labels,set);
+        data.setValueFormatter(new MyValueFormatter());
+
+
+        barChart.setMaxVisibleValueCount(6);
+
+
+        barChart.setPinchZoom(false);
+
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawGridBackground(false);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        barChart.getAxisLeft().setDrawGridLines(false);
+
+        barChart.getAxis(YAxis.AxisDependency.RIGHT).setDrawAxisLine(false);
+        barChart.getAxis(YAxis.AxisDependency.RIGHT).setDrawLabels(false);
+
+        barChart.animateXY(1000,1000);
+
+        barChart.getLegend().setEnabled(false);
+
+        barChart.setDescription("");
+
+        barChart.setData(data);// make the x-axis fit exactly all bars
+        barChart.invalidate(); // refresh
+
+
+
+    }
+
+    private List<String> getLabels(List<Span> spanList) {
+        List<String> retList = new ArrayList<>();
+
+        for(Span x : spanList){
+            retList.add(String.valueOf(x.getSpanNo()+1));
         }
 
+        return retList;
+    }
 
+    private BarDataSet getBarDataSet(List<Span> spanList){
+        List<BarEntry> barEntryList = new ArrayList<>();
 
+        for(Span x: spanList){
+            BarEntry barEntry = new BarEntry((float) x.getDistance()/1000,spanList.indexOf(x));
+            barEntryList.add(barEntry);
+        }
+
+        return new BarDataSet(barEntryList,"BarDataSet");
     }
 
     private Map<String,Span> getFirstAndLastSpan(List<Span> spanList, Data x) {
@@ -210,12 +359,13 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
                         break;
                     }
                 }
-
                 break;
-
             }
         }
 
+
         return map;
+
     }
+
 }
