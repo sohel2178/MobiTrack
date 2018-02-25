@@ -25,7 +25,7 @@
             android:layout_centerVertical="true"
             android:background="@drawable/user_image_back"
             android:gravity="center"
-            android:textSize="30sp"/>
+            android:textSize="40sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -24,9 +24,18 @@ public class Vehicle {
     private String vehicle_monthly_recurring_charge;
     private String vehicle_status;
 
+    private String vehicle_year_make_model;
+
     public Vehicle() {
     }
 
+    public String getVehicle_year_make_model() {
+        return vehicle_year_make_model;
+    }
+
+    public void setVehicle_year_make_model(String vehicle_year_make_model) {
+        this.vehicle_year_make_model = vehicle_year_make_model;
+    }
 
     public String getVehicle_id() {
         return vehicle_id;

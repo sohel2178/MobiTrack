@@ -6,8 +6,10 @@ import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -27,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,14 +52,24 @@ public class DistanceRequest {
 
     private TravelDistanceListener travelDistanceListener;
 
+    public List<LatLng> directionList;
+
+    private Map<Integer,List<LatLng>> directionMap;
+
     public DistanceRequest(Activity activity, Map<String,String> params,TravelDistanceListener travelDistanceListener){
         this.activity=activity;
         this.params = params;
         this.travelDistanceListener = travelDistanceListener;
         gson = new Gson();
         travelDistanceList = new ArrayList<>();
+        this.directionList = new ArrayList<>();
+        this.directionMap = new HashMap<>();
+
         applyPostVolley();
+
+
     }
+
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {
@@ -112,7 +125,19 @@ public class DistanceRequest {
                         error.printStackTrace();
                         hideProgressDialog();
 
-                        Toast.makeText(activity, "Problem in Fetching Data", Toast.LENGTH_SHORT).show();
+                        if(error instanceof TimeoutError){
+                            Toast.makeText(activity, "Problem in Fetching Data", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+
+
+                       /* Log.d("VVVVVVVVV","Error is "+error.getCause().getMessage());
+                        Log.d("VVVVVVVVV","Error is "+error.getCause().getLocalizedMessage());*/
+                        Log.d("VVVVVVVVV","Error is "+error.toString());
+
+
                     }
                 }
         ) {
@@ -121,10 +146,18 @@ public class DistanceRequest {
                 return params;
             }
         };
+
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(activity).add(postRequest);
     }
 
     public void requsetForDirection(DeviceLatLong origin, DeviceLatLong destination, final int index){
+
+        Log.d("YYYYYYYY","Origin Lat "+origin.getLatitude());
+        Log.d("YYYYYYYY","Origin lng "+origin.getLongitude());
+        Log.d("YYYYYYYY","Destination lat "+destination.getLatitude());
+        Log.d("YYYYYYYY","Destination lng "+destination.getLongitude());
 
         counter++;
 
@@ -169,6 +202,7 @@ public class DistanceRequest {
     }
 
     private void processResponse(JSONObject response, int index) {
+        List<LatLng> latLngList = new ArrayList<>();
         processCounter++;
         try {
             JSONArray jsonArray = response.getJSONArray("routes");
@@ -187,14 +221,40 @@ public class DistanceRequest {
 
                 String polyline = poly.getString("points");
 
-                List<LatLng> polyLines = decodePoly(polyline);
-
+                latLngList = decodePoly(polyline);
 
             }
+
+            Log.d("JJJJJJJ",index+"");
+
+            directionMap.put(index,latLngList);
+
+            /*if(processCounter < size){
+                latLngList.remove(latLngList.size() -1 );
+                directionList.addAll(latLngList);
+
+            }*/
             if(processCounter == size){
 
                 if(travelDistanceListener != null){
                     travelDistanceListener.getTravelDistanceList(travelDistanceList);
+                }
+
+
+                for (int i=0;i<size;i++){
+                    if(i==size-1){
+                        List<LatLng> latLngs =directionMap.get(i);
+                        directionList.addAll(latLngs);
+
+                        travelDistanceListener.getDirectionList(directionList);
+
+
+                    }else{
+                        List<LatLng> latLngs =directionMap.get(i);
+                        latLngs.remove(latLngs.size()-1);
+                        directionList.addAll(latLngs);
+                        Log.d("All Direction",directionList+"");
+                    }
                 }
 
 

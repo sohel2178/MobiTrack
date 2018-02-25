@@ -94,9 +94,21 @@ public class NavigationDrawer extends Fragment implements View.OnClickListener {
         tvName = view.findViewById(R.id.user_name);
         tvEmail = view.findViewById(R.id.user_mail);
         tvUserImage = view.findViewById(R.id.user_image);
-        tvName.setText(localData.getCustomerName());
-        tvEmail.setText(localData.getCustomerEmail());
-        tvUserImage.setText(String.valueOf(localData.getCustomerName().toUpperCase().charAt(0)));
+
+
+        if(localData.getCustomerName()!=null){
+            tvName.setText(localData.getCustomerName());
+        }
+
+
+        if(localData.getCustomerEmail()!=null){
+            tvEmail.setText(localData.getCustomerEmail());
+        }
+
+        if(localData.getCustomerName()!=null){
+            tvUserImage.setText(String.valueOf(localData.getCustomerName().toUpperCase().charAt(0)));
+        }
+
     }
 
     @Override

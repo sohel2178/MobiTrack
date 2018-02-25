@@ -1,7 +1,9 @@
 package com.mobitrackbd.mobitrack.Activities;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +55,8 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
     private TextView tvTotalDistance;
 
+    private ImageView ivPlayAnimation;
+
     private Date selectedDate;
 
     private DistanceAdapter adapter;
@@ -62,6 +66,9 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
     private BarChart barChart;
 
     private String[] hourArr;
+
+
+    private List<LatLng> directionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +114,14 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
         Map<String, String> param = new HashMap<>();
         param.put("deviceid",deviceId);
+
+
+
         param.put("date",MyUtil.getStringDateTwo(selectedDate));
+
+        Log.d("HHHH",deviceId);
+        Log.d("HHHH",MyUtil.getStringDateTwo(selectedDate));
+
 
         DistanceRequest distanceRequest = new DistanceRequest(this, param,this);
     }
@@ -132,6 +146,9 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
         //rvDistance.addItemDecoration(new android.support.v7.widget.DividerItemDecoration(getApplicationContext(), android.support.v7.widget.DividerItemDecoration.VERTICAL));
         //rvDistance.addItemDecoration(new DividerItemDecoration(drawable));
         rvDistance.setAdapter(adapter);
+
+        ivPlayAnimation = findViewById(R.id.play_animation);
+        ivPlayAnimation.setOnClickListener(this);
     }
 
     @Override
@@ -139,6 +156,18 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.iv_calender:
                 openCalender();
+                break;
+
+            case R.id.play_animation:
+
+                if(directionList!=null && directionList.size()>0){
+                    Intent intent = new Intent(getApplicationContext(),MapAnimationActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("datalist", (ArrayList<? extends Parcelable>) directionList);
+                    startActivity(intent);
+                }
+
+
                 break;
         }
     }
@@ -204,6 +233,18 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
 
 
+    }
+
+    @Override
+    public void getDirectionList(List<LatLng> latLngList) {
+
+        directionList = latLngList;
+
+        Log.d("HHHHH",latLngList.size()+"");
+        Log.d("HHHHH",latLngList.get(0).latitude+"");
+        Log.d("HHHHH",latLngList.get(0).longitude+"");
+        Log.d("HHHHH",latLngList.get(latLngList.size()-1).latitude+"");
+        Log.d("HHHHH",latLngList.get(latLngList.size()-1).longitude+"");
     }
 
     private void processDataList(List<Data> dataList) {

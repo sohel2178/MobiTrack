@@ -1,5 +1,6 @@
 package com.mobitrackbd.mobitrack.Listener;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.mobitrackbd.mobitrack.Model.Data;
 
 import java.util.List;
@@ -10,4 +11,6 @@ import java.util.List;
 
 public interface TravelDistanceListener {
     public void getTravelDistanceList(List<Data> travelDistanceList);
+
+    public void getDirectionList(List<LatLng> latLngList);
 }

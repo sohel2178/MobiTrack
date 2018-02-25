@@ -27,7 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,15 +45,35 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
 
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Activities.MapActivity" />
-        <activity android:name=".Activities.SumReportActivity" />
-        <activity android:name=".Activities.TripReportActivity" />
-        <activity android:name=".Activities.DistanceReportActivity" />
-        <activity android:name=".Activities.FuelConsumActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.MapActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SumReportActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.TripReportActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.DistanceReportActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FuelConsumActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".Service.LocationService"></service>
-        <service android:name=".Service.MyService"></service>
+        <service android:name=".Service.LocationService" />
+        <service android:name=".Service.MyService" />
+
+        <activity android:name=".Activities.MapAnimationActivity"></activity>
     </application>
 
 </manifest>

@@ -53,7 +53,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleH
         Vehicle vehicle = vehicleList.get(position);
 
         holder.tvModel.setText(vehicle.getVehicle_number());
-        holder.tvNumber.setText(vehicle.getVehicle_number());
+        holder.tvNumber.setText(vehicle.getVehicle_year_make_model());
         holder.tvLocation.setText(vehicle.getVehicle_address());
 
 

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MyUtil {
     private static final String DATE_FORMAT="dd-MMM-yyyy";
-    private static final String DATE_FORMAT_TWO="dd-MMM-yyyy";
+    private static final String DATE_FORMAT_TWO="yyyy-MM-dd";
     private static final String TIME_FORMAT="yyyy-MM-dd HH:mm:ss";
 
 
