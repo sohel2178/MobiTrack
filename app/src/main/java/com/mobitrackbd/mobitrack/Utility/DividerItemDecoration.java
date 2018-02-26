@@ -14,9 +14,11 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDivider;
 
+
     public DividerItemDecoration(Drawable mDivider) {
         this.mDivider = mDivider;
     }
+    private  long abd;
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
