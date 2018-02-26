@@ -2,6 +2,7 @@ package com.mobitrackbd.mobitrack.Listener;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.mobitrackbd.mobitrack.Model.Data;
+import com.mobitrackbd.mobitrack.Model.DeviceLatLong;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface TravelDistanceListener {
     public void getTravelDistanceList(List<Data> travelDistanceList);
 
     public void getDirectionList(List<LatLng> latLngList);
+
+    public void getDeviceLatLong(List<DeviceLatLong> deviceLatLongList);
 }

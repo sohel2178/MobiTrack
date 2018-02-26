@@ -2,6 +2,7 @@ package com.mobitrackbd.mobitrack.Volley;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.mobitrackbd.mobitrack.Model.Data;
 import com.mobitrackbd.mobitrack.Model.DeviceLatLong;
 import com.mobitrackbd.mobitrack.R;
 import com.mobitrackbd.mobitrack.Response.SummaryReportResponse;
+import com.mobitrackbd.mobitrack.Utility.LocalData;
 import com.mobitrackbd.mobitrack.Utility.MyUtil;
 import com.mobitrackbd.mobitrack.Utility.URL;
 
@@ -40,10 +42,11 @@ import java.util.Map;
 public class DistanceRequest {
     private static final String WEB_API_KEY="AIzaSyAbXl5sEkZxVmiLBrvSgHkhwkuZJV1Wn0k";
     //private static final String WEB_API_KEY="AIzaSyA-bYTLzcDgXrH3a2-fPHppu9vsNkZCGDk";
-
+    private String[] apiKeys;
     private Activity activity;
     private Map<String,String> params;
     private String url = URL.SUMMARY_REPORT;
+    private String apiKey;
     private ProgressDialog mProgressDialog;
     private Gson gson;
     private int counter,size,processCounter;
@@ -54,6 +57,7 @@ public class DistanceRequest {
 
     public List<LatLng> directionList;
 
+    private LocalData localData;
     private Map<Integer,List<LatLng>> directionMap;
 
     public DistanceRequest(Activity activity, Map<String,String> params,TravelDistanceListener travelDistanceListener){
@@ -64,10 +68,10 @@ public class DistanceRequest {
         travelDistanceList = new ArrayList<>();
         this.directionList = new ArrayList<>();
         this.directionMap = new HashMap<>();
-
+        this.apiKeys = activity.getResources().getStringArray(R.array.key_array);
+        localData = new LocalData(activity);
+        this.apiKey = getApiKey();
         applyPostVolley();
-
-
     }
 
 
@@ -108,7 +112,11 @@ public class DistanceRequest {
                             List<DeviceLatLong> processList = getProcessList(summaryReportResponse.getLatlongs());
                             size = processList.size()-1;
 
+                            travelDistanceListener.getDeviceLatLong(summaryReportResponse.getLatlongs());
+
                             if(size>0){
+
+
                                 MyThread myThread = new MyThread(processList);
                             }else{
                                 hideProgressDialog();
@@ -356,13 +364,26 @@ public class DistanceRequest {
 
     }
 
+    private String getApiKey(){
+        int lastIndex = localData.getLastIndex();
+        String apiKey = apiKeys[lastIndex];
+        Log.d("OOOOOO",lastIndex+"");
+        if((apiKeys.length - lastIndex)== 1){
+            localData.setLastIndex(0);
+        }else{
+            localData.setLastIndex(lastIndex + 1);
+        }
+        return apiKey;
+    }
+
     private String buildRequestUrl(DeviceLatLong origin, DeviceLatLong destination) {
+
         String requestUrl = "https://maps.googleapis.com/maps/api/directions/json?" +
                 "mode=driving&"
                 + "transit_routing_preference=less_driving&"
                 + "origin=" + origin.getLatitude() + "," + origin.getLongitude() + "&"
                 + "destination=" + destination.getLatitude() + "," + destination.getLongitude() +"&"
-                + "key=" + WEB_API_KEY;
+                + "key="+apiKey;
 
         return requestUrl;
     }

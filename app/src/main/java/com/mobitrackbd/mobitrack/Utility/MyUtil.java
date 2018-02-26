@@ -2,6 +2,7 @@ package com.mobitrackbd.mobitrack.Utility;
 
 
 
+import com.mobitrackbd.mobitrack.Model.LocationSpan;
 import com.mobitrackbd.mobitrack.Model.Span;
 
 import java.text.DateFormat;
@@ -104,6 +105,28 @@ public class MyUtil {
 
     }
 
+    public static List<LocationSpan> getLocationSpanList(Date date){
+
+        List<LocationSpan> spanList = new ArrayList<>();
+
+        long startTime = getBeginingTime(date);
+
+        for(int i=0;i<96;i++){
+            LocationSpan span = new LocationSpan(i);
+            span.setStartTime(startTime);
+            span.setEndTime(fifteenMinutesInterval(startTime)-1000);
+
+            startTime = fifteenMinutesInterval(startTime);
+
+            spanList.add(span);
+
+        }
+
+        return spanList;
+
+
+    }
+
     public static long getEndingTime(long time){
 
         long beginingTime = getBeginingTime(time);
@@ -124,6 +147,13 @@ public class MyUtil {
 
 
         return time+(60*60)*1000;
+
+    }
+
+    public static long fifteenMinutesInterval(long time){
+
+
+        return time+(60*15)*1000;
 
     }
 

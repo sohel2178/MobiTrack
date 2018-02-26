@@ -46,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SumReportActivity extends BaseActivity implements View.OnClickListener,TravelDistanceListener {
+public class SumReportActivity extends BaseActivity implements  View.OnClickListener,TravelDistanceListener {
 
     private TextView tvDate;
     private ImageView ivCalender;
@@ -122,13 +122,10 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
         Map<String, String> param = new HashMap<>();
         param.put("deviceid",deviceId);
-
-
-
         param.put("date",MyUtil.getStringDateTwo(selectedDate));
 
-        Log.d("HHHH",deviceId);
-        Log.d("HHHH",MyUtil.getStringDateTwo(selectedDate));
+//        Log.d("HHHH",deviceId);
+//        Log.d("HHHH",MyUtil.getStringDateTwo(selectedDate));
 
 
         DistanceRequest distanceRequest = new DistanceRequest(this, param,this);
@@ -253,6 +250,12 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
         Log.d("HHHHH",latLngList.get(0).longitude+"");
         Log.d("HHHHH",latLngList.get(latLngList.size()-1).latitude+"");
         Log.d("HHHHH",latLngList.get(latLngList.size()-1).longitude+"");
+    }
+
+    @Override
+    public void getDeviceLatLong(List<DeviceLatLong> deviceLatLongList) {
+        Log.d("MMMMMM",deviceLatLongList.size()+"");
+        
     }
 
     private void processDataList(List<Data> dataList) {

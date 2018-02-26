@@ -13,6 +13,7 @@ public class LocalData {
     private static final String CUSTOMER_ID ="CUSTOMER_ID";
     private static final String CUSTOMER_NAME ="CUSTOMER_NAME";
     private static final String CUSTOMER_EMAIL ="CUSTOMER_EMAIL";
+    private static final String API_KEY ="API_KEY";
 
 
     private SharedPreferences sharedPreferences;
@@ -53,4 +54,12 @@ public class LocalData {
     public void setCustomerEmail(String customerEmail){
         sharedPreferences.edit().putString(CUSTOMER_EMAIL,customerEmail).apply();
     }
+
+    public int getLastIndex(){
+        return sharedPreferences.getInt(API_KEY,0);
+    }
+    public void setLastIndex(int index){
+        sharedPreferences.edit().putInt(API_KEY,index).apply();
+    }
+
 }

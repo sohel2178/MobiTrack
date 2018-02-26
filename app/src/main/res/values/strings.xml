@@ -71,5 +71,17 @@
         <item>10:01 PM to 11:00 PM</item>
         <item>11:01 PM to 12:00 AM</item>
     </string-array>
+
+    <string-array name="key_array">
+        <item>AIzaSyCanYnkUp8kjWil34FCeo5pBKbJYn-BUwE</item>
+        <item>AIzaSyAdNXH0ugp5qB4YYHdcVPx_peIaU13rQWo</item>
+        <item>AIzaSyAoInjTYjk74YTKTXVipRyZGF67xXrXxDo</item>
+        <item>AIzaSyCnpU2qFuYBpuHVAbFXzYWdM7fdZO-iaXk</item>
+        <item>AIzaSyDfLEJt390nlkMJJIyrvP72KqXOfKpQGJc</item>
+        <item>AIzaSyBxk4U7lVLCewsKSAes6o3S8L9KlYez6Yw</item>
+        <item>AIzaSyAOzvXz7UIWlsQJ_3t3rq-Ao9DNed0rQWo</item>
+        <item>AIzaSyBn2kue28FBYn2JdvKkF4fWXQeLA-XQaBE</item>
+        <item>AIzaSyD_CEWe7Mx17IHootim_hUiIhYa_71hzFw</item>
+    </string-array>
 </resources>
 
