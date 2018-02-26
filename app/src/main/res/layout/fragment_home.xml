@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
+    android:background="@color/light_grey"
     tools:context="com.mobitrackbd.mobitrack.Fragments.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,9 +14,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/list"
-            android:text="  Vechicle List"
-            android:background="@color/circle_color"
+            android:text="Select Vehicle"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:background="@color/mobitrackColor"
             android:textColor="@color/white"
             android:id="@+id/title"
             android:textSize="16sp"
@@ -25,7 +27,7 @@
             android:layout_below="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_padding"
+            android:layout_marginTop="@dimen/default_margin"
             android:id="@+id/rv_vehicle">
 
         </android.support.v7.widget.RecyclerView>

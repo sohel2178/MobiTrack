@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#161616</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#d42722</color>
+    <color name="colorPrimaryDark">#a42722</color>
     <color name="colorAccent">#FF4081</color>
 
 
     <color name="text_light">@android:color/white</color>
     <color name="text_dark">#616161</color>
-    <color name="light_grey">#E0E0E0</color>
+    <color name="light_grey">#D0D0D0</color>
 
     <color name="loginButtonColor">#2aabd2</color>
+    <color name="mobitrackColor">#d42722</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="circle_color">#3982c1</color>
     <color name="tomato_color">#ff6347</color>
+    <color name="navigation_back_color">#666</color>
 
+
+
+    <color name="chart_color_1">#ffcccc</color>
+    <color name="chart_color_2">#ffb2b2</color>
+    <color name="chart_color_3">#ff9999</color>
+    <color name="chart_color_4">#ff7f7f</color>
+    <color name="chart_color_5">#ff6666</color>
+    <color name="chart_color_6">#ff4c4c</color>
 
 </resources>

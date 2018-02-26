@@ -1,6 +1,7 @@
 package com.mobitrackbd.mobitrack.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -67,6 +68,13 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
     private String[] hourArr;
 
+    private int[] myColors = {R.color.chart_color_1,R.color.chart_color_2,R.color.chart_color_3,
+            R.color.chart_color_4,R.color.chart_color_5,R.color.chart_color_6};
+    public static final int[] MY_COLOR = {
+            Color.rgb(255, 204, 204), Color.rgb(255, 127, 127), Color.rgb(255, 50, 50),
+            Color.rgb(204, 0, 0), Color.rgb(153, 0, 0)
+    };
+
 
     private List<LatLng> directionList;
 
@@ -82,7 +90,7 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
         total = 0;
         setupToolbar();
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        setTitle("24Hrs Summary Report");
+        setTitle("History");
 
         adapter = new DistanceAdapter(getApplicationContext());
 
@@ -326,14 +334,14 @@ public class SumReportActivity extends BaseActivity implements View.OnClickListe
 
         BarDataSet set = getBarDataSet(spanList);
         List<String> labels = getLabels(spanList);
-        set.setColors(ColorTemplate.JOYFUL_COLORS);
+        set.setColors(MY_COLOR);
         set.setValueTextSize(10);
 
         BarData data = new BarData(labels,set);
         data.setValueFormatter(new MyValueFormatter());
 
 
-        barChart.setMaxVisibleValueCount(6);
+        barChart.setMaxVisibleValueCount(24);
 
 
         barChart.setPinchZoom(false);

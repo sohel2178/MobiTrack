@@ -35,16 +35,15 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:gravity="center_vertical"
-                        android:text="24 Hours Report"
-                        android:textSize="18sp"/>
+                        android:text="Visual Direction" />
 
                     <ImageView
                         android:layout_width="36dp"
@@ -83,6 +82,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/date_icon"
+                        android:tint="@color/mobitrackColor"
                         android:layout_alignParentEnd="true"/>
                 </RelativeLayout>
 
@@ -134,13 +134,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/small_padding"
-                            android:textSize="14sp"/>
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
 
                         <TableRow
                             android:layout_marginTop="@dimen/medium_padding"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/tomato_color">
+                            android:background="@color/mobitrackColor">
 
                             <TextView
                                 android:padding="@dimen/medium_padding"
@@ -201,7 +202,9 @@
                             android:layout_height="wrap_content"
                             android:text="Travel Distance Vs Time"
                             android:padding="@dimen/medium_padding"
-                            android:gravity="center_horizontal"/>
+                            android:gravity="center_horizontal"
+                            android:textStyle="bold"
+                            android:textSize="18sp"/>
 
                         <View
                             android:layout_width="match_parent"

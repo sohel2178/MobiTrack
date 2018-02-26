@@ -10,8 +10,10 @@ import android.graphics.Matrix;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,7 +49,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,VolleyPostListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,VolleyPostListener,
+        View.OnClickListener{
 
     private SupportMapFragment mapFragment;
     private GoogleMap mMap;
@@ -57,12 +60,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private Marker mMarker;
 
-    private BoomMenuButton boomButton;
     private Intent serviceIntent;
 
     private Gson gson;
 
     private LatLng currentLocation;
+
+    private FloatingActionButton fabReport;
 
     private int[] iconArray = new int[]{R.drawable.summary_report,R.drawable.trip_report,R.drawable.distance_report,R.drawable.fuel_consumtion};
 
@@ -117,26 +121,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         gson = new Gson();
 
 
+        fabReport = findViewById(R.id.fab_report);
 
+        fabReport.setOnClickListener(this);
 
-        String[] titleArray = getResources().getStringArray(R.array.title_array);
-        String[] subTitleArray = getResources().getStringArray(R.array.sub_title_array);
-        boomButton = findViewById(R.id.bmb);
-
-        for (int i = 0; i < boomButton.getPiecePlaceEnum().pieceNumber(); i++) {
-            HamButton.Builder builder = new HamButton.Builder()
-                    .normalImageRes(iconArray[i])
-                    .normalText(titleArray[i])
-                    .subNormalText(subTitleArray[i])
-                    .listener(new OnBMClickListener() {
-                        @Override
-                        public void onBoomButtonClick(int index) {
-                            startActivity(index);
-
-                        }
-                    });
-            boomButton.addBuilder(builder);
-        }
 
         //vehicle = new Vehicle(1,23.746466,90.376015);
 
@@ -287,5 +275,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         return address;
+    }
+
+    @Override
+    public void onClick(View view) {
+        startActivity(0);
     }
 }

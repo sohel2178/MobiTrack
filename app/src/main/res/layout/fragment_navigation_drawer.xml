@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@color/navigation_back_color"
     tools:context="com.mobitrackbd.mobitrack.NavigationDrawer">
 
     <RelativeLayout
@@ -47,12 +47,13 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/bottom_container"
         android:layout_below="@+id/top_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/large_padding">
+        android:padding="@dimen/large_padding"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/home"
@@ -64,79 +65,24 @@
                 android:id="@+id/home_icon"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:src="@drawable/home"
+                android:src="@drawable/list"
                 android:padding="@dimen/very_small_padding"/>
             <TextView
                 android:id="@+id/home_text"
                 android:layout_toEndOf="@+id/home_icon"
                 style="@style/NavTextStyle"
-                android:text="Home" />
+                android:text="Vechicle List" />
 
         </RelativeLayout>
 
         <View
             android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/border_height"
-            android:background="@drawable/divider"/>
-
-        <RelativeLayout
-            android:id="@+id/about"
-            android:layout_below="@+id/home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/small_padding">
-            <ImageView
-                android:id="@+id/about_icon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:src="@drawable/aboutus"
-                android:padding="@dimen/very_small_padding"/>
-            <TextView
-                android:id="@+id/about_text"
-                android:layout_toRightOf="@+id/about_icon"
-                style="@style/NavTextStyle"
-                android:text="About Us" />
-        </RelativeLayout>
-
-        <View
-            android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/border_height"
-            android:background="@drawable/divider"/>
-
-        <RelativeLayout
-            android:layout_marginTop="@dimen/border_height"
-            android:id="@+id/contact"
-            android:layout_below="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/small_padding">
-            <ImageView
-                android:id="@+id/contact_icon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:src="@drawable/contactus"
-                android:padding="@dimen/very_small_padding"/>
-            <TextView
-                android:id="@+id/contact_text"
-                android:layout_toRightOf="@+id/contact_icon"
-                style="@style/NavTextStyle"
-                android:text="Contact Us" />
-        </RelativeLayout>
-
-        <View
-            android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/contact"
             android:layout_width="match_parent"
             android:layout_height="@dimen/border_height"
             android:background="@drawable/divider"/>
 
         <RelativeLayout
             android:id="@+id/account"
-            android:layout_below="@+id/contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding">
@@ -155,15 +101,62 @@
 
         <View
             android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="@dimen/border_height"
             android:background="@drawable/divider"/>
 
+        <RelativeLayout
+            android:layout_marginTop="@dimen/border_height"
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/contact_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/contactus"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/contact_text"
+                android:layout_toRightOf="@+id/contact_icon"
+                style="@style/NavTextStyle"
+                android:text="Call Us" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_below="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
+
+        <RelativeLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_padding">
+            <ImageView
+                android:id="@+id/about_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@drawable/aboutus"
+                android:padding="@dimen/very_small_padding"/>
+            <TextView
+                android:id="@+id/about_text"
+                android:layout_toRightOf="@+id/about_icon"
+                style="@style/NavTextStyle"
+                android:text="About Us" />
+        </RelativeLayout>
+
+        <View
+            android:layout_marginStart="@dimen/medium_padding"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/border_height"
+            android:background="@drawable/divider"/>
 
         <RelativeLayout
             android:id="@+id/signout"
-            android:layout_below="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/small_padding">
@@ -183,13 +176,11 @@
 
         <View
             android:layout_marginStart="@dimen/medium_padding"
-            android:layout_below="@+id/signout"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/divider"/>
 
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

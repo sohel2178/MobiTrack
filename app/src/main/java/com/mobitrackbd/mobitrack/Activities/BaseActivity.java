@@ -32,6 +32,8 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+
     }
 
 

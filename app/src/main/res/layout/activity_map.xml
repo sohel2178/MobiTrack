@@ -12,15 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.nightonke.boommenu.BoomMenuButton
-        android:id="@+id/bmb"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="@color/mobitrackColor"
+        app:fabSize="normal"
+        android:id="@+id/fab_report"
+        android:src="@drawable/big_summary_report"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        app:bmb_buttonEnum="ham"
-        app:bmb_normalColor="@color/colorPrimaryDark"
-        app:bmb_piecePlaceEnum="piecePlace_ham_4"
-        app:bmb_buttonPlaceEnum="buttonPlace_ham_4"/>
+        android:layout_margin="@dimen/default_margin"
+        />
+
 
 </RelativeLayout>

@@ -5,7 +5,6 @@
     android:layout_marginBottom="6dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="12dp"
-    app:cardBackgroundColor="#F53132"
     app:cardCornerRadius="4dp">
 
     <RelativeLayout
@@ -14,11 +13,12 @@
         android:padding="10dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:background="@drawable/blue_circle_back"
             android:src="@drawable/car_icon"
             android:id="@+id/vehicle_image"
+            android:layout_centerVertical="true"
             android:padding="13dp"/>
 
         <LinearLayout
@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/vehicle_image"
+            android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
 
