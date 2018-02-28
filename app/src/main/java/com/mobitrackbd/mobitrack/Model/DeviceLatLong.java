@@ -1,10 +1,14 @@
 package com.mobitrackbd.mobitrack.Model;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
+
 /**
  * Created by IMATPC-12 on 19-Feb-18.
  */
 
-public class DeviceLatLong {
+public class DeviceLatLong implements Serializable{
     private String servertime;
     private String latitude;
     private String longitude;
@@ -12,6 +16,7 @@ public class DeviceLatLong {
 
     public DeviceLatLong() {
     }
+
 
     public String getServertime() {
         return servertime;

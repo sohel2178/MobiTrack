@@ -37,10 +37,7 @@ import com.mobitrackbd.mobitrack.Service.LocationService;
 import com.mobitrackbd.mobitrack.Service.MyService;
 import com.mobitrackbd.mobitrack.Utility.URL;
 import com.mobitrackbd.mobitrack.Volley.MyPostVolley;
-import com.nightonke.boommenu.BoomButtons.BoomButton;
-import com.nightonke.boommenu.BoomButtons.HamButton;
-import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
-import com.nightonke.boommenu.BoomMenuButton;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,6 +103,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         float distanceInMeters = loc1.distanceTo(loc2);
 
         return distanceInMeters;
+
 
     }
 

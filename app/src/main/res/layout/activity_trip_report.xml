@@ -13,5 +13,53 @@
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"/>
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:padding="@dimen/medium_padding"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:text="jaalalalal"
+        android:textStyle="bold"/>
+
+    <TableRow
+        android:id="@+id/header"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mobitrackColor">
+
+        <TextView
+            android:padding="@dimen/medium_padding"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Date &amp; Time"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:padding="@dimen/medium_padding"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+    </TableRow>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_trip_report"
+        android:layout_below="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

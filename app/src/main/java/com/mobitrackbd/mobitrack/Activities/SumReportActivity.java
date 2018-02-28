@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.DatePicker;
@@ -33,12 +34,14 @@ import com.mobitrackbd.mobitrack.Chart.MyValueFormatter;
 import com.mobitrackbd.mobitrack.Listener.TravelDistanceListener;
 import com.mobitrackbd.mobitrack.Model.Data;
 import com.mobitrackbd.mobitrack.Model.DeviceLatLong;
+import com.mobitrackbd.mobitrack.Model.MyLatLong;
 import com.mobitrackbd.mobitrack.Model.Span;
 import com.mobitrackbd.mobitrack.R;
 import com.mobitrackbd.mobitrack.Utility.DividerItemDecoration;
 import com.mobitrackbd.mobitrack.Utility.MyUtil;
 import com.mobitrackbd.mobitrack.Volley.DistanceRequest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,7 +69,11 @@ public class SumReportActivity extends BaseActivity implements  View.OnClickList
 
     private BarChart barChart;
 
+    private List<DeviceLatLong> tripReportList;
+
     private String[] hourArr;
+
+    private com.github.clans.fab.FloatingActionButton fabViewInMap,fabTripReport;
 
     private int[] myColors = {R.color.chart_color_1,R.color.chart_color_2,R.color.chart_color_3,
             R.color.chart_color_4,R.color.chart_color_5,R.color.chart_color_6};
@@ -154,6 +161,12 @@ public class SumReportActivity extends BaseActivity implements  View.OnClickList
 
         ivPlayAnimation = findViewById(R.id.play_animation);
         ivPlayAnimation.setOnClickListener(this);
+
+        fabTripReport = findViewById(R.id.menu_item_trip_report);
+        fabViewInMap = findViewById(R.id.menu_item_view_in_map);
+
+        fabTripReport.setOnClickListener(this);
+        fabViewInMap.setOnClickListener(this);
     }
 
     @Override
@@ -162,7 +175,32 @@ public class SumReportActivity extends BaseActivity implements  View.OnClickList
             case R.id.iv_calender:
                 openCalender();
                 break;
+            case R.id.menu_item_trip_report:
+                Intent intentTripReport = new Intent(getApplicationContext(),TripReportActivity.class);
+                if(tripReportList != null && tripReportList.size() > 2){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Data", (Serializable) tripReportList);
+                    intentTripReport.putExtras(bundle);
+                    intentTripReport.putExtra("Date",MyUtil.getStringDate(selectedDate));
+                    startActivity(intentTripReport);
+                }else{
+                    Toast.makeText(this, "Data Not Found", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.menu_item_view_in_map:
+                if(directionList != null && directionList.size()>0){
+                    List<MyLatLong> myLatLongList = new ArrayList<>();
+                    for (LatLng x:directionList){
+                        myLatLongList.add(new MyLatLong(x));
+                    }
 
+                    Intent animIntent = new Intent(getApplicationContext(), MapAnimationActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Data", (Serializable) myLatLongList);
+                    animIntent.putExtras(bundle);
+                    startActivity(animIntent);
+                }
+                break;
             case R.id.play_animation:
 
                 if(directionList!=null && directionList.size()>0){
@@ -244,16 +282,11 @@ public class SumReportActivity extends BaseActivity implements  View.OnClickList
     public void getDirectionList(List<LatLng> latLngList) {
 
         directionList = latLngList;
-
-        Log.d("HHHHH",latLngList.size()+"");
-        Log.d("HHHHH",latLngList.get(0).latitude+"");
-        Log.d("HHHHH",latLngList.get(0).longitude+"");
-        Log.d("HHHHH",latLngList.get(latLngList.size()-1).latitude+"");
-        Log.d("HHHHH",latLngList.get(latLngList.size()-1).longitude+"");
     }
 
     @Override
     public void getDeviceLatLong(List<DeviceLatLong> deviceLatLongList) {
+        tripReportList = deviceLatLongList;
         Log.d("MMMMMM",deviceLatLongList.size()+"");
         
     }
